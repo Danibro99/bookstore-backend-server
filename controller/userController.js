@@ -17,7 +17,6 @@ exports.registerController = async (req,res)=>{
             await newUser.save()
             return res.status(201).json(newUser)
         }
-
     }catch(err){
         console.log(err);
         return res.status(500).json(err)
