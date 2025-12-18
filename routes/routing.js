@@ -22,9 +22,18 @@ router.post('/login',userController.loginController)
 //google login
 router.post('/google/sign-in',userController.googleLoginController)
 
+//get home books
+router.get('/books/home',bookController.getHomePageBooksController)
+
 //authorised user
 
 //add book 
 router.post('/user/books/add',jwtMiddleware,multerMiddleware.array('uploadIMG',3),bookController.addBookController)
+
+//get all books for user
+router.get('/books/all',jwtMiddleware,bookController.getAllBooksController)
+
+//get all books user uploaded for user
+router.get('/user-books/all',jwtMiddleware,bookController.getUserProfilePageBooksController)
 
 module.exports = router
