@@ -1,4 +1,5 @@
-const books = require('../models/bookModel')
+const books = require('../models/bookModel');
+const { $where } = require('../models/userMODEL');
 
 //add book
 exports.addBookController = async (req,res)=>{
@@ -48,11 +49,15 @@ exports.getHomePageBooksController = async(req,res)=>{
 
 exports.getAllBooksController = async(req,res)=>{
     console.log("inside getAllBooksController");
+    //get search query from req 
+    const searchKey = req.query.search
+    console.log(searchKey);
+    
     //get usermail from token
     const loginUserMail = req.payload
     try{
         //get all books except login user books
-        const allBooks = await books.find({sellerMail:{$ne:loginUserMail}})
+        const allBooks = await books.find({sellerMail:{$ne:loginUserMail},title:{$regex:searchKey,$options:"i"}})
         res.status(200).json(allBooks)
     }catch(err){
         console.log(err);

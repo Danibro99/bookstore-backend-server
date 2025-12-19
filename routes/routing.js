@@ -36,4 +36,7 @@ router.get('/books/all',jwtMiddleware,bookController.getAllBooksController)
 //get all books user uploaded for user
 router.get('/user-books/all',jwtMiddleware,bookController.getUserProfilePageBooksController)
 
+//get all books user bought for user
+router.get('/user-books/bought',jwtMiddleware,bookController.getUserPurchaseBooksController)
+
 module.exports = router
